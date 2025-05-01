@@ -18,4 +18,4 @@ https://www.notion.so/teamsparta/API-1e62dc3ef5148075863bf1cedc401bdd?pvs=4
 
 ## 📌 ERD
 
-<img src="">
+<img src="https://github.com/classseoha/comment-crud/blob/master/ERD.png?raw=true">
