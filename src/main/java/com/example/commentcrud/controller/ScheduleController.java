@@ -38,34 +38,34 @@ public class ScheduleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto<ScheduleDetailResponseDto>> getSchedule (
-            @PathVariable Long scheduleId,
+            @PathVariable Long id,
             HttpServletRequest request
     ) {
 
-        ScheduleDetailResponseDto responseDto = scheduleService.getSchedule(scheduleId);
+        ScheduleDetailResponseDto responseDto = scheduleService.getSchedule(id);
 
         return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_GET_SUCCESS, responseDto, request.getRequestURI()));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<ApiResponseDto<ScheduleResponseDto>> updateSchedule (
-            @PathVariable Long scheduleId,
+            @PathVariable Long id,
             @RequestBody ScheduleUpdateRequestDto requestDto,
             HttpServletRequest request
             ) {
 
-        ScheduleResponseDto responseDto = scheduleService.updateSchedule(scheduleId, requestDto);
+        ScheduleResponseDto responseDto = scheduleService.updateSchedule(id, requestDto);
 
         return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_UPDATE_SUCCESS, responseDto, request.getRequestURI()));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<Void>> deleteSchedule (
-            @PathVariable Long scheduleId,
+            @PathVariable Long id,
             HttpServletRequest request
     ) {
 
-        scheduleService.deleteSchedule(scheduleId);
+        scheduleService.deleteSchedule(id);
 
         return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_DELETE_SUCCESS, null, request.getRequestURI()));
     }

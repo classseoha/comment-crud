@@ -44,19 +44,19 @@ public class ScheduleService {
                 .collect(Collectors.toList());
     }
 
-    public ScheduleDetailResponseDto getSchedule(Long scheduleId) {
+    public ScheduleDetailResponseDto getSchedule(Long id) {
 
-        Schedule schedule = scheduleRepository.findById(scheduleId)
+        Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
 
-        List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
+        List<Comment> comments = commentRepository.findByScheduleId(id);
 
         return ScheduleDetailResponseDto.from(schedule, comments);
     }
 
-    public ScheduleResponseDto updateSchedule(Long scheduleId, ScheduleUpdateRequestDto requestDto) {
+    public ScheduleResponseDto updateSchedule(Long id, ScheduleUpdateRequestDto requestDto) {
 
-        Schedule schedule = scheduleRepository.findById(scheduleId)
+        Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
 
         Boolean isUpdated = false;
@@ -81,9 +81,9 @@ public class ScheduleService {
         return ScheduleResponseDto.from(schedule);
     }
 
-    public void deleteSchedule(Long scheduleId) {
+    public void deleteSchedule(Long id) {
 
-        Schedule schedule = scheduleRepository.findById(scheduleId)
+        Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
 
         scheduleRepository.delete(schedule);
