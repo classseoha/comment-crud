@@ -1,0 +1,91 @@
+package com.example.commentcrud.service;
+
+import com.example.commentcrud.common.exception.base.CustomException;
+import com.example.commentcrud.common.exception.enums.ErrorCode;
+import com.example.commentcrud.dto.*;
+import com.example.commentcrud.entity.Comment;
+import com.example.commentcrud.entity.Schedule;
+import com.example.commentcrud.repository.CommentRepository;
+import com.example.commentcrud.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.example.commentcrud.common.exception.enums.ErrorCode.CONTENTS_NOT_FOUND;
+
+@Service
+@RequiredArgsConstructor
+public class ScheduleService {
+
+    private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
+
+    public ScheduleResponseDto createSchedule(SchedulePostRequestDto requestDto) {
+
+        Schedule schedule = new Schedule(requestDto.getNickname(), requestDto.getTitle(), requestDto.getContents());
+        
+        Schedule savedSchedule = scheduleRepository.save(schedule);
+
+        return ScheduleResponseDto.from(schedule);
+    }
+
+    public List<ScheduleAllGetResponseDto> findSchedules() {
+
+        List<Schedule> schedules = scheduleRepository.findAll();
+
+        return schedules.stream()
+                .map(schedule -> {
+                    int commentCount = commentRepository.countByScheduleId(schedule.getId());
+                    return ScheduleAllGetResponseDto.from(schedule, commentCount);
+                })
+                .collect(Collectors.toList());
+    }
+
+    public ScheduleDetailResponseDto getSchedule(Long scheduleId) {
+
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
+
+        List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
+
+        return ScheduleDetailResponseDto.from(schedule, comments);
+    }
+
+    public ScheduleResponseDto updateSchedule(Long scheduleId, ScheduleUpdateRequestDto requestDto) {
+
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
+
+        Boolean isUpdated = false;
+
+        if (requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
+
+            schedule.updateSchedule(requestDto);
+            isUpdated = true;
+        }
+
+        if (requestDto.getContents() != null && !requestDto.getContents().isBlank()) {
+
+            schedule.updateSchedule(requestDto);
+            isUpdated = true;
+        }
+
+        if (!isUpdated) {
+
+            throw new CustomException(ErrorCode.NO_VALUE_CHANGED, "변경된 값이 없습니다.");
+        }
+
+        return ScheduleResponseDto.from(schedule);
+    }
+
+    public void deleteSchedule(Long scheduleId) {
+
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
+
+        scheduleRepository.delete(schedule);
+    }
+}
