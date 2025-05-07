@@ -11,6 +11,7 @@ import com.example.commentcrud.repository.CommentRepository;
 import com.example.commentcrud.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,6 +43,8 @@ public class CommentService {
 
         return CommentResponseDto.from(comment);
         }
+
+    @Transactional
     public CommentResponseDto updateComment(Long id, CommentUpdateRequestDto requestDto) {
 
         Comment comment = commentRepository.findById(id)
@@ -63,6 +66,7 @@ public class CommentService {
         return CommentResponseDto.from(comment);
     }
 
+    @Transactional
     public void deleteComment(Long id) {
 
         Comment comment = commentRepository.findById(id)

@@ -9,6 +9,7 @@ import com.example.commentcrud.repository.CommentRepository;
 import com.example.commentcrud.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,29 +50,18 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
 
-        List<Comment> comments = commentRepository.findByScheduleId(id);
+        List<Comment> comments = commentRepository.findByScheduleIdOrderByCreatedAtAsc(id);
 
         return ScheduleDetailResponseDto.from(schedule, comments);
     }
 
+    @Transactional
     public ScheduleResponseDto updateSchedule(Long id, ScheduleUpdateRequestDto requestDto) {
 
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONTENTS_NOT_FOUND, "일정을 찾을 수 없습니다."));
 
-        Boolean isUpdated = false;
-
-        if (requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
-
-            schedule.updateSchedule(requestDto);
-            isUpdated = true;
-        }
-
-        if (requestDto.getContents() != null && !requestDto.getContents().isBlank()) {
-
-            schedule.updateSchedule(requestDto);
-            isUpdated = true;
-        }
+        boolean isUpdated = schedule.updateSchedule(requestDto);
 
         if (!isUpdated) {
 
@@ -81,6 +71,7 @@ public class ScheduleService {
         return ScheduleResponseDto.from(schedule);
     }
 
+    @Transactional
     public void deleteSchedule(Long id) {
 
         Schedule schedule = scheduleRepository.findById(id)

@@ -38,14 +38,20 @@ public class Schedule extends BaseEntity {
         this.contents = contents;
     }
 
-    public void updateSchedule(ScheduleUpdateRequestDto requestDto) {
+    public boolean updateSchedule(ScheduleUpdateRequestDto requestDto) {
+
+        boolean updated = false;
 
         if(requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
             this.title = requestDto.getTitle();
+            updated = true;
         }
 
         if(requestDto.getContents() != null && !requestDto.getContents().isBlank()) {
             this.contents = requestDto.getContents();
+            updated = true;
         }
+
+        return updated;
     }
 }

@@ -9,6 +9,7 @@ import com.example.commentcrud.repository.CommentRepository;
 import com.example.commentcrud.repository.InCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +40,7 @@ public class InCommentService {
         return InCommentDetailResponseDto.from(comment, inComment);
     }
 
+    @Transactional
     public InCommentResponseDto updateInComment(Long id, InCommentUpdateRequestDto requestDto) {
 
         InComment inComment = inCommentRepository.findById(id)
@@ -60,6 +62,7 @@ public class InCommentService {
         return InCommentResponseDto.from(inComment);
     }
 
+    @Transactional
     public void deleteInComment(Long id) {
 
         InComment inComment = inCommentRepository.findById(id)

@@ -9,5 +9,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     int countByScheduleId(Long scheduleId);
 
-    List<Comment> findByScheduleId(Long scheduleId);
+    List<Comment> findByScheduleIdOrderByCreatedAtAsc(Long scheduleId);
 }
