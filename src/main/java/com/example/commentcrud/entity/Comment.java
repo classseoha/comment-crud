@@ -1,6 +1,8 @@
 package com.example.commentcrud.entity;
 
 import com.example.commentcrud.common.entity.BaseEntity;
+import com.example.commentcrud.dto.CommentUpdateRequestDto;
+import com.example.commentcrud.dto.ScheduleUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +24,19 @@ public class Comment extends BaseEntity {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schedule_id")
+    @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
     public Comment(String nickname, String contents, Schedule schedule) {
         this.nickname = nickname;
         this.contents = contents;
         this.schedule = schedule;
+    }
+
+    public void updateComment(CommentUpdateRequestDto requestDto) {
+
+        if(requestDto.getContents() != null && !requestDto.getContents().isBlank()) {
+            this.contents = requestDto.getContents();
+        }
     }
 }

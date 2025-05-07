@@ -7,13 +7,17 @@ import lombok.Getter;
 @Getter
 public class CommentPostRequestDto {
 
+    private Long scheduleId; // 일정 ID 추가
+
     private final String nickname;
 
     private final String contents;
 
     @JsonCreator
-    public CommentPostRequestDto(@JsonProperty("nickname") String nickname,
+    public CommentPostRequestDto(@JsonProperty("scheduleId") Long scheduleId,
+                                 @JsonProperty("nickname") String nickname,
                                  @JsonProperty("contents") String contents) {
+        this.scheduleId = scheduleId;
         this.nickname = nickname;
         this.contents = contents;
     }
