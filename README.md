@@ -40,14 +40,66 @@
 * Build Tool : Gradle
 
 
-## 📌 API 명세서
+## 📌 API 명세서 및 동작 캡처본
 
 https://www.notion.so/teamsparta/API-1e62dc3ef5148075863bf1cedc401bdd?pvs=4
+
+* 일정 생성
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EC%9D%BC%EC%A0%95%EC%83%9D%EC%84%B1.png?raw=true">
+
+* 일정 전체 조회
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EC%9D%BC%EC%A0%95%EC%A0%84%EC%B2%B4%EC%A1%B0%ED%9A%8C.png?raw=true">
+
+* 일정 특정 조회
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EC%9D%BC%EC%A0%95%ED%8A%B9%EC%A0%95%EC%A1%B0%ED%9A%8C.png?raw=true">
+
+* 일정 수정
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EC%9D%BC%EC%A0%95%EC%88%98%EC%A0%95.png?raw=true">
+
+* 일정 삭제
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EC%9D%BC%EC%A0%95%EC%82%AD%EC%A0%9C.png?raw=true">
+
+* 댓글 생성
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%93%EA%B8%80%EC%83%9D%EC%84%B1.png?raw=true">
+
+* 댓글 조회
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%93%EA%B8%80%EC%A1%B0%ED%9A%8C.png?raw=true">
+
+* 댓글 수정
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%93%EA%B8%80%EC%88%98%EC%A0%95.png?raw=true">
+
+* 댓글 삭제
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%93%EA%B8%80%EC%82%AD%EC%A0%9C.png?raw=true">
+
+* 대댓글 생성
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%80%EB%8C%93%EA%B8%80%EC%83%9D%EC%84%B1.png?raw=true">
+
+* 대댓글 조회
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%80%EB%8C%93%EA%B8%80%EC%A1%B0%ED%9A%8C.png?raw=true">
+
+* 대댓글 수정
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%80%EB%8C%93%EA%B8%80%EC%88%98%EC%A0%95.png?raw=true">
+
+* 대댓글 삭제
+
+<img src="https://github.com/classseoha/comment-crud/blob/main/APIcapture/%EB%8C%80%EB%8C%93%EA%B8%80%EC%82%AD%EC%A0%9C.png?raw=true">
 
 
 ## 📌 ERD
 
-<img src="https://github.com/classseoha/comment-crud/blob/master/ERD.png?raw=true">
+<img src="https://github.com/classseoha/comment-crud/blob/main/ERD.png?raw=true">
 
 
 ## 📌 Git Commit Message Convention

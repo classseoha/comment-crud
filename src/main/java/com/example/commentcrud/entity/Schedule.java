@@ -29,7 +29,7 @@ public class Schedule extends BaseEntity {
     @Column(nullable = false, columnDefinition = "longtext")
     private String contents;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     public Schedule(String nickname, String title, String contents) {
